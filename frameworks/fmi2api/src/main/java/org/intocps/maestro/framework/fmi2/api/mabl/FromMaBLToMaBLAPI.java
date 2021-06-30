@@ -92,6 +92,10 @@ public class FromMaBLToMaBLAPI {
         for (PExp componentName : componentIdentifiers) {
             Map.Entry<String, ComponentVariableFmi2Api> component = getComponentVariableFrom(builder, componentName, env);
             fmuInstances.put(component.getKey(), component.getValue());
+            /*
+            TODO: See Issue https://github.com/INTO-CPS-Association/maestro/issues/285
+             */
+            builder.getDynamicScope().registerComponentVariableFmi2Api(component.getValue());
         }
 
 
