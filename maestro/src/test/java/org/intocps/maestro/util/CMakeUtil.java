@@ -118,6 +118,8 @@ public class CMakeUtil {
 
         if (autoNinja && hasNinja()) {
             cmds.add("-GNinja");
+        } else if (isWindows()) {
+            cmds.add("-G\"MinGW Makefiles\"");
         }
 
         if (install != null) {
