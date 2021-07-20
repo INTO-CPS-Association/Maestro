@@ -60,11 +60,20 @@ jobs:
         if: matrix.os != 'windows-latest'
         run: mvn test -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
-      - name: upload test reports
+      - name: upload test reports win
         uses: actions/upload-artifact@v2
-        if: ${{ always() }}
+        if: ${{ failure() && matrix.os == 'windows-latest'}}
         with:
-          name: surfire
+          name: surfire-win
+          path: |
+            **/target/surefire-reports/*
+          retention-days: 1
+
+      - name: upload test reports ubuntu
+        uses: actions/upload-artifact@v2
+        if: ${{ failure() && matrix.os == 'ubuntu-latest'}}
+        with:
+          name: surfire-ubuntu
           path: |
             **/target/surefire-reports/*
           retention-days: 1
