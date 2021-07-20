@@ -18,11 +18,13 @@ jobs:
       matrix:
         os: [ windows-latest ] #ubuntu-latest,, macos-latest
     steps:
-      - name: zlib
+      - uses: msys2/setup-msys2@v2
         if: matrix.os == 'windows-latest'
-        run: |
-          git clone https://github.com/commontk/zlib.git zlib
-          cd zlib && cmake . && make install
+        name: zlib
+        with:
+          msystem: mingw64
+          install: mingw-w64-x86_64-toolchain
+
 
       - uses: actions/checkout@v2
 
