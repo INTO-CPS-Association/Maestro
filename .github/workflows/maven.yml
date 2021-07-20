@@ -18,13 +18,15 @@ jobs:
       matrix:
         os: [ windows-latest ] #ubuntu-latest,, macos-latest
     steps:
-      - uses: actions/checkout@v2
-
       - name: zlib
         if: matrix.os == 'windows-latest'
         run: |
           git clone https://github.com/commontk/zlib.git zlib
-          cd zlib ; cmake . ; make install
+          cd zlib && cmake . && make install
+
+      - uses: actions/checkout@v2
+
+
 
       - name: Set up Java
         uses: actions/setup-java@v1.4.3
