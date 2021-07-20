@@ -20,19 +20,6 @@ FetchContent_Declare(intocpsfmi
 FetchContent_Populate(intocpsfmi)
 set(intocpsfmi-src "intocpsfmi-src")
 
-IF (WIN32)
-
-FetchContent_Declare(ZLIB
-        GIT_REPOSITORY https://github.com/commontk/zlib.git
-        GIT_SHALLOW ON
-        SOURCE_DIR "${CMAKE_BINARY_DIR}/zlib"
-)
-
-FetchContent_MakeAvailable(ZLIB)
-
-
-ENDIF()
-
 
 SET(BUILD_TOOLS OFF CACHE BOOL "Build tools in the src directory (zipcmp, zipmerge, ziptool)")
 SET(BUILD_REGRESS OFF CACHE BOOL "Build regression tests")
