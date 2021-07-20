@@ -25,11 +25,6 @@ jobs:
           msystem: mingw64
           install: mingw-w64-x86_64-toolchain
 
-
-      - uses: actions/checkout@v2
-
-
-
       - name: Set up Java
         uses: actions/setup-java@v1.4.3
         with:
@@ -45,10 +40,13 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install pipenv
 
+      - uses: actions/checkout@v2
+
       - name: Maven Build
         run: mvn -B package --file pom.xml -DskipTests
 
       - name: Maven Test
+        shell: msys2 {0}
         run: mvn test
 
       - name: Install Python Dependencies
