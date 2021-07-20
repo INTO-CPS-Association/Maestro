@@ -22,8 +22,12 @@ jobs:
         if: matrix.os == 'windows-latest'
         name: zlib
         with:
+          path-type: inherit
           msystem: mingw64
-          install: mingw-w64-x86_64-toolchain
+          install: >-
+            mingw-w64-x86_64-toolchain
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-ninja
 
       - name: Set up Java
         uses: actions/setup-java@v1.4.3
