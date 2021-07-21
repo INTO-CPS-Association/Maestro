@@ -20,16 +20,16 @@ jobs:
 
     steps:
       # https://github.com/msys2/setup-msys2
-      - uses: msys2/setup-msys2@v2
-        if: matrix.os == 'windows-latest'
-        name: zlib
-        with:
-          path-type: inherit
-          msystem: MINGW64
-          install: >-
-            mingw-w64-x86_64-toolchain
-            mingw-w64-x86_64-cmake
-            mingw-w64-x86_64-ninja
+      #      - uses: msys2/setup-msys2@v2
+      #        if: matrix.os == 'windows-latest'
+      #        name: MSYS
+      #        with:
+      #          path-type: inherit
+      #          msystem: MINGW64
+      #          install: >-
+      #            mingw-w64-x86_64-toolchain
+      #            mingw-w64-x86_64-cmake
+      #            mingw-w64-x86_64-ninja
 
       - name: Set up Java
         uses: actions/setup-java@v1.4.3
@@ -52,13 +52,13 @@ jobs:
         run: mvn -D"org.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn" -B package --file pom.xml -DskipTests
 
       - name: Maven Test
-        if: matrix.os == 'windows-latest'
-        shell: msys2 {0}
+        #        if: matrix.os == 'windows-latest'
+        #        shell: msys2 {0}
         run: mvn -D"org.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn" test
 
-      - name: Maven Test
-        if: matrix.os != 'windows-latest'
-        run: mvn test -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+      #      - name: Maven Test
+      #        if: matrix.os != 'windows-latest'
+      #        run: mvn test -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
       - name: upload test reports win
         uses: actions/upload-artifact@v2

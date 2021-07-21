@@ -135,7 +135,15 @@ public class CMakeUtil {
 
         cmds.add("-S" + source.getAbsolutePath());
 
+        if (isWindows()) {
+            String arg = String.join(" ", cmds);
+            cmds.clear();
+            cmds.add("C:\\msys64\\usr\\bin\\bash.exe");
+            cmds.add("-c");
+            cmds.add("\"" + arg + "\"");
 
+        }
+        System.out.println(String.join(" ", cmds));
         ProcessBuilder pb = new ProcessBuilder(cmds);
         pb.directory(source);
 
